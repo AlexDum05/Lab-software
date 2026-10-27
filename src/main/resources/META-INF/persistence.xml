@@ -3,11 +3,9 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_2.xsd"
              version="3.2">
-    <persistence-unit name="default" transaction-type="JTA">
-        <jta-data-source>jdbc/DerbyPool</jta-data-source>
+    <persistence-unit name="default">
         <properties>
-            <!-- Creează tabelele automat în baza de date la pornire -->
-            <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
+            <property name="eclipselink.deploy-on-startup" value="false"/>
         </properties>
     </persistence-unit>
 </persistence>
