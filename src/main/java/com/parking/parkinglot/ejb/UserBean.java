@@ -25,13 +25,22 @@ public class UserBean {
         try {
             TypedQuery<User> typedQuery = entityManager.createQuery("SELECT u FROM User u", User.class);
             List<User> users = typedQuery.getResultList();
-            List<UserDto> userDtos = new ArrayList<>();
-            for (User user : users) {
-                userDtos.add(new UserDto(user.getUsername(), user.getEmail()));
-            }
-            return userDtos;
+            return copyUsersToDto(users);
         } catch (Exception ex) {
             throw new EJBException(ex);
         }
+    }
+
+    private List<UserDto> copyUsersToDto(List<User> users) {
+        List<UserDto> userDtos = new ArrayList<>();
+        for (User user : users) {
+            UserDto dto = new UserDto(
+                    user.getId(),
+                    user.getUsername(),
+                    user.getEmail()
+            );
+            userDtos.add(dto);
+        }
+        return userDtos;
     }
 }
